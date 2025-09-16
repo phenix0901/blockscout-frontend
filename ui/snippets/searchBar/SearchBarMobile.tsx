@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -67,27 +68,23 @@ const SearchBarMobile = ({ isHeroBanner }: Props) => {
   let trigger: React.ReactNode | null = null;
   if (isHeroBanner) {
     trigger = (
-      <div style={{ position: 'relative', width: '100%' }}>
+      <Box position="relative" width="100%">
         <SearchBarInput
-          onFormClick={ onTriggerClick }
           isHeroBanner={ isHeroBanner }
           readOnly={ true }
         />
-        <div
+        <Box
           onClick={ handleOverlayClick }
           aria-label="Search"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 1,
-            backgroundColor: 'transparent',
-            cursor: 'pointer',
-          }}
+          cursor="pointer"
+          zIndex={ 1 }
+          position="absolute"
+          top={ 0 }
+          left={ 0 }
+          right={ 0 }
+          bottom={ 0 }
         />
-      </div>
+      </Box>
     );
   } else {
     trigger = (
@@ -120,7 +117,6 @@ const SearchBarMobile = ({ isHeroBanner }: Props) => {
             ref={ inputRef }
             onChange={ handleSearchTermChange }
             onClear={ handleClear }
-            onFormClick={ onTriggerClick }
             value={ searchTerm }
             mb={ 5 }
           />

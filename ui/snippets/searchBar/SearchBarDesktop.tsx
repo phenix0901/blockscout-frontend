@@ -24,7 +24,7 @@ type Props = {
   isHeroBanner?: boolean;
 };
 
-const SearchBar = ({ isHeroBanner }: Props) => {
+const SearchBarDesktop = ({ isHeroBanner }: Props) => {
   const inputRef = React.useRef<HTMLFormElement>(null);
   const menuWidth = React.useRef<number>(0);
 
@@ -201,4 +201,4 @@ const SearchBar = ({ isHeroBanner }: Props) => {
   );
 };
 
-export default SearchBar;
+export default SearchBarDesktop;
