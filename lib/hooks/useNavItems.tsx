@@ -76,12 +76,12 @@ export default function useNavItems(): ReturnType {
     } : null;
 
     const verifiedContracts: NavItem | null =
-     {
-       text: 'Verified contracts',
-       nextRoute: { pathname: '/verified-contracts' as const },
-       icon: 'verified',
-       isActive: pathname === '/verified-contracts',
-     };
+    {
+      text: 'Verified contracts',
+      nextRoute: { pathname: '/verified-contracts' as const },
+      icon: 'verified',
+      isActive: pathname === '/verified-contracts',
+    };
     const nameLookup = config.features.nameService.isEnabled || config.features.clusters.isEnabled ? {
       text: 'Name services lookup',
       nextRoute: { pathname: '/name-domains' as const },
@@ -235,101 +235,101 @@ export default function useNavItems(): ReturnType {
       ].filter(Boolean);
     }
 
-    const tokensNavItems = [
-      {
-        text: 'Tokens',
-        nextRoute: { pathname: '/tokens' as const },
-        icon: 'token',
-        isActive: pathname === '/tokens' || pathname.startsWith('/token/'),
-      },
-      {
-        text: 'Token transfers',
-        nextRoute: { pathname: '/token-transfers' as const },
-        icon: 'token-transfers',
-        isActive: pathname === '/token-transfers',
-      },
-      config.features.pools.isEnabled && {
-        text: 'DEX tracker',
-        nextRoute: { pathname: '/pools' as const },
-        icon: 'dex-tracker',
-        isActive: pathname === '/pools' || pathname.startsWith('/pool/'),
-      },
-    ].filter(Boolean);
+    // const tokensNavItems = [
+    //   {
+    //     text: 'Tokens',
+    //     nextRoute: { pathname: '/tokens' as const },
+    //     icon: 'token',
+    //     isActive: pathname === '/tokens' || pathname.startsWith('/token/'),
+    //   },
+    //   {
+    //     text: 'Token transfers',
+    //     nextRoute: { pathname: '/token-transfers' as const },
+    //     icon: 'token-transfers',
+    //     isActive: pathname === '/token-transfers',
+    //   },
+    //   config.features.pools.isEnabled && {
+    //     text: 'DEX tracker',
+    //     nextRoute: { pathname: '/pools' as const },
+    //     icon: 'dex-tracker',
+    //     isActive: pathname === '/pools' || pathname.startsWith('/pool/'),
+    //   },
+    // ].filter(Boolean);
 
-    const statsNavItem = (() => {
-      const uptimeItem = {
-        text: 'Uptime',
-        nextRoute: { pathname: '/uptime' as const },
-        icon: 'refresh_menu',
-        isActive: pathname.startsWith('/uptime'),
-      };
+    // const statsNavItem = (() => {
+    //   const uptimeItem = {
+    //     text: 'Uptime',
+    //     nextRoute: { pathname: '/uptime' as const },
+    //     icon: 'refresh_menu',
+    //     isActive: pathname.startsWith('/uptime'),
+    //   };
 
-      if (config.features.stats.isEnabled && config.features.megaEth.isEnabled) {
-        return {
-          text: 'Charts & stats',
-          icon: 'stats',
-          isActive: pathname.startsWith('/stats') || pathname.startsWith('/uptime'),
-          subItems: [
-            {
-              text: `${ config.chain.name } stats`,
-              nextRoute: { pathname: '/stats' as const },
-              icon: 'graph',
-              isActive: pathname.startsWith('/stats/'),
-            },
-            uptimeItem,
-          ],
-        };
-      }
+    //   if (config.features.stats.isEnabled && config.features.megaEth.isEnabled) {
+    //     return {
+    //       text: 'Charts & stats',
+    //       icon: 'stats',
+    //       isActive: pathname.startsWith('/stats') || pathname.startsWith('/uptime'),
+    //       subItems: [
+    //         {
+    //           text: `${ config.chain.name } stats`,
+    //           nextRoute: { pathname: '/stats' as const },
+    //           icon: 'graph',
+    //           isActive: pathname.startsWith('/stats/'),
+    //         },
+    //         uptimeItem,
+    //       ],
+    //     };
+    //   }
 
-      if (!config.features.stats.isEnabled) {
-        if (config.features.megaEth.isEnabled) {
-          return uptimeItem;
-        }
-        return null;
-      }
+    //   if (!config.features.stats.isEnabled) {
+    //     if (config.features.megaEth.isEnabled) {
+    //       return uptimeItem;
+    //     }
+    //     return null;
+    //   }
 
-      return {
-        text: 'Charts & stats',
-        nextRoute: { pathname: '/stats' as const },
-        icon: 'stats',
-        isActive: pathname.startsWith('/stats'),
-      };
-    })();
+    //   return {
+    //     text: 'Charts & stats',
+    //     nextRoute: { pathname: '/stats' as const },
+    //     icon: 'stats',
+    //     isActive: pathname.startsWith('/stats'),
+    //   };
+    // })();
 
-    const apiNavItem: NavItem | null = config.features.apiDocs.isEnabled ? {
-      text: 'API',
-      nextRoute: { pathname: '/api-docs' as const },
-      icon: 'restAPI',
-      isActive: pathname.startsWith('/api-docs'),
-    } : null;
+    // const apiNavItem: NavItem | null = config.features.apiDocs.isEnabled ? {
+    //   text: 'API',
+    //   nextRoute: { pathname: '/api-docs' as const },
+    //   icon: 'restAPI',
+    //   isActive: pathname.startsWith('/api-docs'),
+    // } : null;
 
-    const otherNavItems: Array<NavItem> | Array<Array<NavItem>> = [
-      config.features.opSuperchain.isEnabled ? {
-        text: 'Verify contract',
-        // TODO @tom2drum adjust URL to Vera
-        url: 'https://vera.blockscout.com',
-      } : {
-        text: 'Verify contract',
-        nextRoute: { pathname: '/contract-verification' as const },
-        isActive: pathname.startsWith('/contract-verification'),
-      },
-      config.features.gasTracker.isEnabled && {
-        text: 'Gas tracker',
-        nextRoute: { pathname: '/gas-tracker' as const },
-        isActive: pathname.startsWith('/gas-tracker'),
-      },
-      config.features.publicTagsSubmission.isEnabled && {
-        text: 'Submit public tag',
-        nextRoute: { pathname: '/public-tags/submit' as const },
-        isActive: pathname.startsWith('/public-tags/submit'),
-      },
-      rollupFeature.isEnabled && rollupFeature.type === 'arbitrum' && {
-        text: 'Txn withdrawals',
-        nextRoute: { pathname: '/txn-withdrawals' as const },
-        isActive: pathname.startsWith('/txn-withdrawals'),
-      },
-      ...config.UI.navigation.otherLinks,
-    ].filter(Boolean);
+    // const otherNavItems: Array<NavItem> | Array<Array<NavItem>> = [
+    //   config.features.opSuperchain.isEnabled ? {
+    //     text: 'Verify contract',
+    //     // TODO @tom2drum adjust URL to Vera
+    //     url: 'https://vera.blockscout.com',
+    //   } : {
+    //     text: 'Verify contract',
+    //     nextRoute: { pathname: '/contract-verification' as const },
+    //     isActive: pathname.startsWith('/contract-verification'),
+    //   },
+    //   config.features.gasTracker.isEnabled && {
+    //     text: 'Gas tracker',
+    //     nextRoute: { pathname: '/gas-tracker' as const },
+    //     isActive: pathname.startsWith('/gas-tracker'),
+    //   },
+    //   config.features.publicTagsSubmission.isEnabled && {
+    //     text: 'Submit public tag',
+    //     nextRoute: { pathname: '/public-tags/submit' as const },
+    //     isActive: pathname.startsWith('/public-tags/submit'),
+    //   },
+    //   rollupFeature.isEnabled && rollupFeature.type === 'arbitrum' && {
+    //     text: 'Txn withdrawals',
+    //     nextRoute: { pathname: '/txn-withdrawals' as const },
+    //     isActive: pathname.startsWith('/txn-withdrawals'),
+    //   },
+    //   ...config.UI.navigation.otherLinks,
+    // ].filter(Boolean);
 
     const mainNavItems: ReturnType['mainNavItems'] = [
       {
@@ -338,26 +338,26 @@ export default function useNavItems(): ReturnType {
         isActive: blockchainNavItems.flat().some(item => isInternalItem(item) && item.isActive),
         subItems: blockchainNavItems,
       },
-      {
-        text: 'Tokens',
-        icon: 'token',
-        isActive: tokensNavItems.flat().some(item => isInternalItem(item) && item.isActive),
-        subItems: tokensNavItems,
-      },
-      config.features.marketplace.isEnabled ? {
-        text: 'DApps',
-        nextRoute: { pathname: '/apps' as const },
-        icon: 'apps',
-        isActive: pathname.startsWith('/app'),
-      } : null,
-      statsNavItem,
-      apiNavItem,
-      {
-        text: 'Other',
-        icon: 'gear',
-        isActive: otherNavItems.flat().some(item => isInternalItem(item) && item.isActive),
-        subItems: otherNavItems,
-      },
+      // {
+      //   text: 'Tokens',
+      //   icon: 'token',
+      //   isActive: tokensNavItems.flat().some(item => isInternalItem(item) && item.isActive),
+      //   subItems: tokensNavItems,
+      // },
+      // config.features.marketplace.isEnabled ? {
+      //   text: 'DApps',
+      //   nextRoute: { pathname: '/apps' as const },
+      //   icon: 'apps',
+      //   isActive: pathname.startsWith('/app'),
+      // } : null,
+      // statsNavItem,
+      // apiNavItem,
+      // {
+      //   text: 'Other',
+      //   icon: 'gear',
+      //   isActive: otherNavItems.flat().some(item => isInternalItem(item) && item.isActive),
+      //   subItems: otherNavItems,
+      // },
     ].filter(Boolean);
 
     const accountNavItems: ReturnType['accountNavItems'] = [
